@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Fusões - Digimon World 2 (Sistema Completo)</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f0f8ff; }
+        h1 { text-align: center; color: #ff4500; }
+        .container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        label { display: block; margin: 10px 0 5px; font-weight: bold; }
+        select { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; }
+        button { background: #ff4500; color: white; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-size: 16px; }
+        button:hover { background: #cc3700; }
+        #resultado { margin-top: 20px; padding: 15px; border: 2px solid #ddd; border-radius: 5px; display: none; }
+        .sucesso { border-color: #4caf50; background: #e8f5e8; }
+        .erro { border-color: #f44336; background: #ffebee; }
+        .digimon-info { margin: 5px 0; font-style: italic; }
+        .aviso { color: orange; font-weight: bold; }
+        .filtro { margin-bottom: 10px; }
+        .filtro select { width: auto; display: inline-block; margin-right: 10px; }
+        .input-resumo { font-size: 12px; color: #666; margin-bottom: 10px; }
+        .logica-resumo { font-size: 11px; color: #888; }
+    </style>
+</head>
+<body>
+    <h1>🦕 Guia de Fusões e Evoluções - Digimon World 2 (Lógicas Completas: Rookie/Champion/Ultimate)</h1>
+    <div class="container">
+        <p><em>Selecione dois Digimon (Champion+). Resultado baseado nas suas tabelas exatas. Tipo do 1º Digimon. Atributos combinados ditam o nome.</em></p>
+        
+        <div class="filtro">
+            <label>Filtrar por Level:</label>
+            <select id="filtroLevel" onchange="filtrarSelects()">
+                <option value="">Todos (Champion+)</option>
+                <option value="Champion">Apenas Champion</option>
+                <option value="Ultimate">Apenas Ultimate</option>
+                <option value="Mega">Apenas Mega</option>
+            </select>
+        </div>
+
+        <label for="digimon1">Selecione Digimon 1 (Tipo influencia o resultado):</label>
+        <select id="digimon1" onchange="limparSegundo()">
+            <option value="">Escolha...</option>
+            <!-- Todos os Champions (de sua lista inicial) -->
+            <option value="Airdramon|Champion|Vaccine|Flying">Airdramon (Champion, Vaccine, Flying)</option>
+            <option value="Akatorimon|Champion|Data|Flying">Akatorimon (Champion, Data, Flying)</option>
+            <option value="Angemon|Champion|Vaccine|Spirit">Angemon (Champion, Vaccine, Spirit)</option>
+            <option value="Apemon|Champion|Vaccine|Beast">Apemon (Champion, Vaccine, Beast)</option>
+            <option value="Bakemon|Champion|Virus|Spirit">Bakemon (Champion, Virus, Spirit)</option>
+            <option value="Birdramon|Champion|Vaccine|Flying">Birdramon (Champion, Vaccine, Flying)</option>
+            <option value="B-Garurumon|Champion|Virus|Beast">B-Garurumon (Champion, Virus, Beast)</option>
+            <option value="Centarumon|Champion|Data|Beast">Centarumon (Champion, Data, Beast)</option>
+            <option value="Clockmon|Champion|Data|Junk">Clockmon (Champion, Data, Junk)</option>
+            <option value="Coelamon|Champion|Data|Marine">Coelamon (Champion, Data, Marine)</option>
+            <option value="Cyclomon|Champion|Virus|Dragon">Cyclomon (Champion, Virus, Dragon)</option>
+            <option value="DarkLizamon|Champion|Virus|Dragon">DarkLizamon (Champion, Virus, Dragon)</option>
+            <option value="D-Tyrannomon|Champion|Virus|Dragon">D-Tyrannomon (Champion, Virus, Dragon)</option>
+            <option value="Deltamon|Champion|Virus|Dragon">Deltamon (Champion, Virus, Dragon)</option>
+            <option value="Devimon|Champion|Virus|Spirit">Devimon (Champion, Virus, Spirit)</option>
+            <option value="Devidramon|Champion|Virus|Dragon">Devidramon (Champion, Virus, Dragon)</option>
+            <option value="Dolphmon|Champion|Vaccine|Marine">Dolphmon (Champion, Vaccine, Marine)</option>
+            <option value="Drimogemon|Champion|Data|Beast">Drimogemon (Champion, Data, Beast)</option>
+            <option value="Flamedramon|Champion|Vaccine|Flying">Flamedramon (Champion, Vaccine, Flying)</option>
+            <option value="FlareLizamon|Champion|Data|Dragon">FlareLizamon (Champion, Data, Dragon)</option>
+            <option value="Flymon|Champion|Virus|Insect">Flymon (Champion, Virus, Insect)</option>
+            <option value="Frigimon|Champion|Vaccine|Beast">Frigimon (Champion, Vaccine, Beast)</option>
+            <option value="Fugamon|Champion|Virus|Beast">Fugamon (Champion, Virus, Beast)</option>
+            <option value="Garurumon|Champion|Vaccine|Beast">Garurumon (Champion, Vaccine, Beast)</option>
+            <option value="Gatomon|Champion|Vaccine|Spirit">Gatomon (Champion, Vaccine, Spirit)</option>
+            <option value="Gekomon|Champion|Virus|Marine">Gekomon (Champion, Virus, Marine)</option>
+            <option value="Gesomon|Champion|Virus|Marine">Gesomon (Champion, Virus, Marine)</option>
+            <option value="Greymon|Champion|Vaccine|Dragon">Greymon (Champion, Vaccine, Dragon)</option>
+            <option value="Guardromon|Champion|Virus|Junk">Guardromon (Champion, Virus, Junk)</option>
+            <option value="Gururumon|Champion|Vaccine|Beast">Gururumon (Champion, Vaccine, Beast)</option>
+            <option value="Hyogamon|Champion|Virus|Beast">Hyogamon (Champion, Virus, Beast)</option>
+            <option value="Icemon|Champion|Data|Spirit">Icemon (Champion, Data, Spirit)</option>
+            <option value="IceDevimon|Champion|Virus|Spirit">IceDevimon (Champion, Virus, Spirit)</option>
+            <option value="Ikakkumon|Champion|Vaccine|Marine">Ikakkumon (Champion, Vaccine, Marine)</option>
+            <option value="Kabuterimon|Champion|Vaccine|Insect">Kabuterimon (Champion, Vaccine, Insect)</option>
+            <option value="Kiwimon|Champion|Data|Flying">Kiwimon (Champion, Data, Flying)</option>
+            <option value="Kogamon|Champion|Data|Spirit">Kogamon (Champion, Data, Spirit)</option>
+            <option value="Kokatorimon|Champion|Data|Flying">Kokatorimon (Champion, Data, Flying)</option>
+            <option value="Kuwagamon|Champion|Virus|Insect">Kuwagamon (Champion, Virus, Insect)</option>
+            <option value="Leomon|Champion|Vaccine|Spirit">Leomon (Champion, Vaccine, Spirit)</option>
+            <option value="Meramon|Champion|Data|Junk">Meramon (Champion, Data, Junk)</option>
+            <option value="Mojyamon|Champion|Vaccine|Beast">Mojyamon (Champion, Vaccine, Beast)</option>
+            <option value="Monochromon|Champion|Data|Dragon">Monochromon (Champion, Data, Dragon)</option>
+            <option value="MoriShellmon|Champion|Data|Marine">MoriShellmon (Champion, Data, Marine)</option>
+            <option value="Nanimon|Champion|Virus|Spirit">Nanimon (Champion, Virus, Spirit)</option>
+            <option value="Ninjamon|Champion|Data|Spirit">Ninjamon (Champion, Data, Spirit)</option>
+            <option value="N-Drimogemon|Champion|Data|Beast">N-Drimogemon (Champion, Data, Beast)</option>
+            <option value="Numemon|Champion|Virus|Junk">Numemon (Champion, Virus, Junk)</option>
+            <option value="Octomon|Champion|Virus|Marine">Octomon (Champion, Virus, Marine)</option>
+            <option value="Ogremon|Champion|Virus|Beast">Ogremon (Champion, Virus, Beast)</option>
+            <option value="P-Sukamon|Champion|Virus|Junk">P-Sukamon (Champion, Virus, Junk)</option>
+            <option value="Raremon|Champion|Virus|Junk">Raremon (Champion, Virus, Junk)</option>
+            <option value="RedVegimon|Champion|Virus|Plant">RedVegimon (Champion, Virus, Plant)</option>
+            <option value="SandYanmamon|Champion|Data|Insect">SandYanmamon (Champion, Data, Inset)</option>
+            <option value="Seadramon|Champion|Data|Marine">Seadramon (Champion, Data, Marine)</option>
+            <option value="Shellmon|Champion|Data|Marine">Shellmon (Champion, Data, Marine)</option>
+            <option value="ShimaUnimon|Champion|Vaccine|Beast">ShimaUnimon (Champion, Vaccine, Beast)</option>
+            <option value="Sorcerymon|Champion|Vaccine|Spirit">Sorcerymon (Champion, Vaccine, Spirit)</option>
+            <option value="Soulmon|Champion|Virus|Spirit">Soulmon (Champion, Virus, Spirit)</option>
+            <option value="Starmon|Champion|Data|Spirit">Starmon (Champion, Data, Spirit)</option>
+            <option value="Sukamon|Champion|Virus|Junk">Sukamon (Champion, Virus, Junk)</option>
+            <option value="Tankmon|Champion|Data|Junk">Tankmon (Champion, Data, Junk)</option>
+            <option value="Togemon|Champion|Data|Plant">Togemon (Champion, Data, Plant)</option>
+            <option value="Tortomon|Champion|Vaccine|Marine">Tortomon (Champion, Vaccine, Marine)</option>
+            <option value="Tuskmon|Champion|Virus|Dragon">Tuskmon (Champion, Virus, Dragon)</option>
+            <option value="Tyrannomon|Champion|Data|Dragon">Tyrannomon (Champion, Data, Dragon)</option>
+            <option value="Unimon|Champion|Vaccine|Beast">Unimon (Champion, Vaccine, Beast)</option>
+            <option value="Veedramon|Champion|Vaccine|Flying">Veedramon (Champion, Vaccine, Flying)</option>
+            <option value="Vegimon|Champion|Virus|Plant">Vegimon (Champion, Virus, Plant)</option>
+            <option value="Wizardmon|Champion|Data|Spirit">Wizardmon (Champion, Data, Spirit)</option>
+            <option value="Woodmon|Champion|Virus|Plant">Woodmon (Champion, Virus, Plant)</option>
+            <option value="Yanmamon|Champion|Data|Insect">Yanmamon (Champion, Data, Insect)</option>
+            <option value="Zassoumon|Champion|Virus|Plant">Zassoumon (Champion, Virus, Plant)</option>
+            <!-- Todos os Ultimates -->
+            <option value="AeroVeedramon|Ultimate|Vaccine|Flying">AeroVeedramon (Ultimate, Vaccine, Flying)</option>
+            <option value="Andromon|Ultimate|Vaccine|Junk">Andromon (Ultimate, Vaccine, Junk)</option>
+            <option value="Angewomon|Ultimate|Vaccine|Spirit">
